@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Welcome!</title>
+
+  <!-- Font utama -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Font monospaced untuk jam -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      background-image: url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(6px);
+      z-index: 1;
+    }
+
+    .content {
+      z-index: 2;
+      text-align: center;
+      padding: 40px 60px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      animation: fadeIn 1.2s ease forwards, float 4s ease-in-out infinite;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(20px); }
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    h1 {
+      font-size: 50px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .time {
+      font-family: 'JetBrains Mono', monospace;  /* supaya angka stabil */
+      font-size: 58px;
+      font-weight: 400;
+      margin-top: 15px;
+      letter-spacing: 2px;
+    }
+
+    .date {
+      font-size: 22px;
+      margin-top: 12px;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="overlay"></div>
+  
+  <div class="content">
+    <h1 id="greet">Halo, Dimas!</h1>
+    <div class="time" id="time">00:00:00</div>
+    <div class="date" id="date">Loading...</div>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, "0");
+      const m = String(now.getMinutes()).padStart(2, "0");
+      const s = String(now.getSeconds()).padStart(2, "0");
+
+      document.getElementById("time").textContent = `${h}:${m}:${s}`;
+
+      // Greeting otomatis
+      let greet = "";
+      if (now.getHours() >= 4 && now.getHours() < 10) greet = "Selamat pagi, Dimas!";
+      else if (now.getHours() >= 10 && now.getHours() < 15) greet = "Selamat siang, Dimas!";
+      else if (now.getHours() >= 15 && now.getHours() < 18) greet = "Selamat sore, Dimas!";
+      else greet = "Selamat malam, Dimas!";
+      document.getElementById("greet").textContent = greet;
+
+      // Tanggal
+      const date = now.toLocaleDateString('id-ID', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      });
+
+      document.getElementById("date").textContent = date;
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+
+</body>
+</html>
