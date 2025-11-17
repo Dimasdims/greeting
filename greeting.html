@@ -25,8 +25,8 @@
       align-items: center;
       color: white;
 
-      /* 💡 GRADIENT BARU: putih → biru → orange */
-      background: linear-gradient(135deg, #ffffff, #3b82f6, #fb923c);
+      /* 🇮🇩 GRADIENT MERAH → PUTIH → BIRU */
+      background: linear-gradient(135deg, #ff0000, #ffffff, #0057ff);
 
       background-size: cover;
       background-position: center;
@@ -37,7 +37,7 @@
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.40); /* sedikit gelap supaya teks tetap jelas */
+      background: rgba(0, 0, 0, 0.35);
       backdrop-filter: blur(6px);
       z-index: 1;
     }
@@ -83,16 +83,47 @@
       margin-top: 12px;
       opacity: 0.9;
     }
+
+    .footer {
+      margin-top: 18px;
+      font-size: 20px;
+      font-weight: 600;
+      opacity: 0.95;
+      letter-spacing: 1px;
+    }
+
+    /* ✈️ ANIMASI PESAWAT KERTAS */
+    .plane {
+      position: absolute;
+      width: 70px;
+      top: 50%;
+      left: -100px;
+      z-index: 3;
+      animation: fly 6s linear infinite;
+    }
+
+    @keyframes fly {
+      0%   { transform: translate(-150px, 20px) rotate(10deg); }
+      25%  { transform: translate(300px, -40px) rotate(0deg); }
+      50%  { transform: translate(700px, 10px) rotate(-5deg); }
+      75%  { transform: translate(1100px, -30px) rotate(2deg); }
+      100% { transform: translate(1500px, 20px) rotate(8deg); }
+    }
+
   </style>
 </head>
 
 <body>
   <div class="overlay"></div>
-  
+
+  <!-- ✈️ Pesawat kertas -->
+  <img class="plane" src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Paper_plane_icon.svg">
+
   <div class="content">
     <h1 id="greet">Halo, Dimas!</h1>
     <div class="time" id="time">00:00:00</div>
     <div class="date" id="date">Loading...</div>
+    <div class="footer">AirNav Indonesia</div>
   </div>
 
   <script>
